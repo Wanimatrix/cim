@@ -18,14 +18,36 @@
 
 
 #include <ncurses.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define KEY_ESC 27
+
+void init() {
+    initscr();
+    raw();
+    noecho();
+    refresh();
+}
+
+void insert_mode() {
+    int ch = 0;
+    while(ch != KEY_ESC) {
+        ch = getchar();
+        printw("%c", ch);
+        refresh();
+    }
+}
+
+void finalize() {
+    endwin();
+}
 
 int main()
-{	
-	initscr();			/* Start curses mode 		  */
-	printw("Hello World !!!");	/* Print Hello World		  */
-	refresh();			/* Print it on to the real screen */
-	getch();			/* Wait for user input */
-	endwin();			/* End curses mode		  */
+{
+    init();
+    insert_mode();
+    finalize();
 
-	return 0;
+    return EXIT_SUCCESS;
 }
