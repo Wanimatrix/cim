@@ -17,37 +17,15 @@
 */
 
 
-#include <ncurses.h>
+#include "window.h"
+#include "mode.h"
 #include <stdlib.h>
-#include <stdbool.h>
-
-#define KEY_ESC 27
-
-void init() {
-    initscr();
-    raw();
-    noecho();
-    refresh();
-}
-
-void insert_mode() {
-    int ch = 0;
-    while(ch != KEY_ESC) {
-        ch = getchar();
-        printw("%c", ch);
-        refresh();
-    }
-}
-
-void finalize() {
-    endwin();
-}
 
 int main()
 {
-    init();
+    init_window();
     insert_mode();
-    finalize();
+    cleanup_window();
 
     return EXIT_SUCCESS;
 }

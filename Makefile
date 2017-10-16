@@ -1,8 +1,8 @@
 CC := gcc
 CFLAGS := -I. -g -Wall
 LDFLAGS := -lncurses
-OBJS := cim.o 
-HEADERS := 
+OBJS := cim.o mode.o window.o
+HEADERS := mode.h window.h
 
 %.o: %.c ${HEADERS}
 	${CC} ${CFLAGS} -c -o $@ $<
